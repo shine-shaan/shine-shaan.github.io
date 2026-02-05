@@ -1,6 +1,8 @@
 ---
 title: GoLang, Fiber 프레임워크의 POST 메서드
 layout: single
+category: software
+tags: ["golang","fiber"]
 ---
 
 Fiber에서는 HTTP 요청을 수신하고, 응답할 수 있다.
