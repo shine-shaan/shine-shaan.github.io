@@ -1,6 +1,8 @@
 ---
 title: GoLang, 변수 타입 변환
 layout: single
+category: software
+tags: ["golang"]
 ---
 
 
