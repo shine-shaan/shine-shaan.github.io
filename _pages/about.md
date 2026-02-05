@@ -3,6 +3,7 @@ permalink: /about/
 title: "About"
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
-
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+고등학교 졸업과 동시에 개인사업으로 유기화학 필기를 위한 노트를 판매했습니다.
+노트를 판매하며 유통, 제작, 마케팅을 경험하며 점차 사업에 대한 주관이 생겼습니다.
+이후 몇 개의 스타트업을 경험하며 스스로가 즐겁게 할 수 있는 일을 찾았습니다.
+제가 좋아하는 일은 **연구하고 기록하는 과정을 돕는 것**입니다.
