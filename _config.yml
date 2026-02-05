@@ -105,4 +105,4 @@ tag_archive:
 analytics:
   provider: "google-gtag"
   google:
-    tracking_id": "G-NE51XQKB89"
+    tracking_id: "G-NE51XQKB89"
