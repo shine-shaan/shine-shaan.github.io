@@ -61,7 +61,7 @@ plugins:
 
 author:
   name   : "Shaan Lee"
-  avatar : "/assets/images/bio-photo.jpg"
+  avatar : "/assets/images/shine-shaan-profile.jpg"
   bio    : "My awesome biography constrained to a sentence or two goes here."
   links:
     - label: "Website"
