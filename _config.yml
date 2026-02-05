@@ -19,9 +19,7 @@ locale: ko-KR
 title: Shaan Blog
 email: shaan@sciencebro.kr
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  blog of software develop and business log
 github_username: shine-shaan
 minimal_mistakes_skin: default
 search: true
@@ -62,11 +60,11 @@ plugins:
 author:
   name   : "Shaan Lee"
   avatar : "/assets/images/shine-shaan-profile.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "도전하고 배워가는 과정을 기록"
   links:
-    - label: "Website"
+    - label: "LinkedIn"
       icon: "fas fa-fw fa-link"
-      url: "https://"
+      url: "https://www.linkedin.com/in/%EC%84%B8%ED%98%84-%EC%9D%B4-a35842281/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/shine-shaan"
