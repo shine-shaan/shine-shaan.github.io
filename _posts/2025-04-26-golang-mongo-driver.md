@@ -1,7 +1,8 @@
 ---
 title: GoLang, Mongo Driver
 layout: single
-date: 2025-04-26 12:00:00 +09:00 
+category: software
+tags: ["golang","mongo"]
 ---
 
 Python 프로젝트에서 데이터베이스로 Mongo를 주로 이용해 왔다.
