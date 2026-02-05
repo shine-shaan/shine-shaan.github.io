@@ -1,6 +1,8 @@
 ---
 title: GoLang, Fiber 프레임워크
 layout: single
+category: software
+tags: ["golang","fiber"]
 ---
 
 Go 언어로 API 서버를 구현하기 위해서 Fiber라는 프레임워크를 사용한다.
