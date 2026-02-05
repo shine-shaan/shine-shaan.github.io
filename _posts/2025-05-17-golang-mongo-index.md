@@ -30,7 +30,6 @@ singleSampleIndexModel := mongo.IndexModel{Keys: bson.D{{Key: "sample_id", Value
 
 ## 복합 인덱스
 
-{% raw %}
 ```
 compoundSampleIndexModel := mongo.IndexModel{Keys: bson.D{{Key: "sample_id", Value: 1},{Key: "name",Value: 1}}}
 ```
@@ -47,7 +46,6 @@ unique 설정이 true이면, 해당 필드는 컬렉션 내에서 유일한 값�
 
 ## 단일 필드 인덱스 unique 설정
 
-{% raw %}
 ```
 singleSampleIndexModel := mongo.IndexModel{Keys: bson.D{{Key: "sample_id", Value: 1}}, Options: options.Index().SetUnique(true)}
 ```
@@ -55,7 +53,6 @@ singleSampleIndexModel := mongo.IndexModel{Keys: bson.D{{Key: "sample_id", Value
 
 ## 복합 인덱스 unique 설정
 
-{% raw %}
 ```
 compoundSampleIndexModel := mongo.IndexModel{Keys: bson.D{{Key: "sample_id", Value: 1}, {Key: "name", Value: 1}}, Options: options.Index().SetUnique(true)}
 ```
@@ -75,3 +72,4 @@ name, err := collection.Indexes().CreateOne(context.TODO(), singleSampleIndexMod
 
 name, err := collection.Indexes().CreateOne(context.TODO(), compoundSampleIndexModel)
 ```
+{% endraw %}
