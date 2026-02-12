@@ -21,7 +21,6 @@ email: shaan@sciencebro.kr
 description: >- # this means to ignore newlines until "baseurl:"
   blog of software develop and business log
 유행을 이용한 매출이 아닌 문제 해결을 위한 수단을 연구하며 기록합니다
-#스타트업 #연구개발 #소프트웨어
 github_username: shine-shaan
 minimal_mistakes_skin: default
 search: true
