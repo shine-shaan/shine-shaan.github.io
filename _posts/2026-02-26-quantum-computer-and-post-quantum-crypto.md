@@ -5,7 +5,7 @@ layout: single
 category: software
 tags:
   - software
-  - security
+  - secure
 date: 2026-02-26 12:00:00 +09:00
 ---
 
