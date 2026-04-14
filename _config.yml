@@ -77,7 +77,7 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/shine-shaan"
     - label: "Privacy Policy"
-      url: "https://shinie-shaan.github.io/privacy"
+      url: "https://shine-shaan.github.io/privacy/"
       icon: "fas fa-user-shield"
 
 defaults:
