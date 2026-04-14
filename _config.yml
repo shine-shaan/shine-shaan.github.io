@@ -76,9 +76,9 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/shine-shaan"
-    - label: "privacy policy"
+    - label: "Privacy Policy"
       url: "https://shinie-shaan.github.io/privacy"
-      icon: "lock"
+      icon: "fas fa-user-shield"
 
 defaults:
   # _posts
