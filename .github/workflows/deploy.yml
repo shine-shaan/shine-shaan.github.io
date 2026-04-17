@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,3 +35,4 @@ jobs:
       - name: Notify IndexNow
         run: |
           curl -X GET "https://api.indexnow.org/indexnow?url=https://shine-shaan.github.io/&key=${{ secrets.INDEXNOW_KEY }}&keyLocation=https://shine-shaan.github.io/${{ secrets.INDEXNOW_KEY }}.txt"
+      
