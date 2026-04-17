@@ -12,7 +12,7 @@ Fiber에서는 HTTP 요청을 수신하고, 응답할 수 있다.
 (데이터를 직접 조작하지 않고 특정 구조체에 바로 할당하는 방식)
 <br/>
 
-# Fiber Listen POST Method
+## Fiber Listen POST Method
 Fiber App에서 POST Method를 수신하는 방법은 아래와 같다.
 ```
 package main
@@ -27,7 +27,7 @@ app.Listen(":3000")
 ```
 <br/>
 
-# Curl request
+## Curl request
 위 예제와 같다면 "http://localhost:3000/path"에서 POST 메서드를 수신한다.
 
 일반적으로, POST 메서드를 사용하는 경우 POST BODY에 서버에 전달할 데이터를 입력한다.
@@ -55,7 +55,7 @@ Curl을 예시로 들면, 아래와 같은 요청 구문을 사용한다.
 
 <br/>
 
-# Fiber Body
+## Fiber Body
 Fiber는 Fiber.Ctx 타입의 데이터를 인자로 받아 핸들러 함수를 호출한다.
 
 예제는 인자에서 Body 데이터를 가공하는 과정이다.
