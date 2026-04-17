@@ -1,0 +1,730 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="ko-KR" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>블록체인과 스마트 컨트랙트 - Shaan Blog</title>
+<meta name="description" content="블록체인 안의 함수, 스마트 컨트랙트">
+
+
+  <meta name="author" content="Shaan Lee">
+  
+  <meta property="article:author" content="Shaan Lee">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Shaan Blog">
+<meta property="og:title" content="블록체인과 스마트 컨트랙트">
+<meta property="og:url" content="https://shine-shaan.github.io/software/block-chain-and-smart-contract/">
+
+
+  <meta property="og:description" content="블록체인 안의 함수, 스마트 컨트랙트">
+
+
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-09T12:00:00+09:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://shine-shaan.github.io/software/block-chain-and-smart-contract/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Shaan Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3386046731537333"
+     crossorigin="anonymous"></script>
+<meta name="google-site-verification" content="mcVX_1eVNAtuUkRvS_IZp8d2YLlIfMYfCh_kZTXdHN0" />
+<meta name="naver-site-verification" content="bf2cad0ec300604ff64f61fc0763e733f697485c" />
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Shaan Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/posts/"
+                
+                
+              >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://shine-shaan.github.io/">
+        <img src="/assets/images/shine-shaan-profile.jpg" alt="Shaan Lee" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://shine-shaan.github.io/" itemprop="url">Shaan Lee</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>도전하고 배워가는 과정을 기록</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/in/%EC%84%B8%ED%98%84-%EC%9D%B4-a35842281/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="블록체인과 스마트 컨트랙트">
+    <meta itemprop="description" content="블록체인 안의 함수, 스마트 컨트랙트">
+    <meta itemprop="datePublished" content="2026-03-09T12:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://shine-shaan.github.io/software/block-chain-and-smart-contract/" itemprop="url">블록체인과 스마트 컨트랙트
+</a>
+          </h1>
+          
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="블록체인">블록체인</h2>
+
+<p>블록체인은 각 데이터 간의 연결고리를 만들어 데이터의 외부 개입에 의한 위변조를 방지하는 기술이다. <br />
+외부에서 임의로 기존 데이터 사이에 새로운 데이터를 삽입하거나 기존 데이터를 변조하면 블록체인 규칙에 의해 저장된 검증 데이터가 모두 바뀌기 때문에 검증 시점에서 위변조를 탐지할 수 있다. <br /></p>
+
+<h3 id="작업증명">작업증명</h3>
+
+<p>블록체인의 연결고리 방식 중 작업증명이 있다. <br />
+작업증명 방식은 높은 부하를 가진 연산을 통해 작업의 위변조를 증명할 수 있는 노드를 선정하는 방식이다. <br />
+위변조를 증명하기 위한 후보 노드들은 증명 대상 데이터를 모아서 해시 알고리즘을 연산한다. <br />
+다만, 데이터를 단순히 해시로 변환하는게 아닌 일종의 검증 문자인 ‘nonce’를 추가해서 연산한다. <br />
+nonce는 임의의 숫자이며 해시 알고리즘의 특성 상 데이터의 극히 일부가 변경되어도 해시 문자열 전체가 바뀌기 때문에 nonce의 규칙을 이용해서 검증하는게 아닌, 생성된 <strong>해시 문자열이 규칙에 부합하는 경우가 연산의 성공이며 증명 노드가 되는 방식</strong>이다. <br />
+nonce를 계속 변경하며 규칙에 맞는 해시를 생성해야 하는 특성으로 인해 작업증명 방식은 증명 노드에 요구하는 연산량이 매우 높고, 변조를 위해서는 네트워크에 기여하는 모든 노드보다 높은 연산량을 가져야 하는 <strong>자본적 해자</strong>를 가진다. <br /></p>
+
+<h3 id="지분증명">지분증명</h3>
+
+<p>블록체인의 연결고리 방식 중 지분증명도 있다. <br />
+지분증명 방식은 작업증명과 달리 연산을 통해 위변조 증명 노드를 선정하지 않는다. <br />
+해당 네트워크에 자산을 예치하고, 네트워크에 대한 <strong>지분을 이용해 위변조 증명 노드를 선정</strong>한다. <br />
+지분이 큰 노드가 증명 노드가 될 확률이 높고, 증명 노드는 해시 블록 생성 대가로 추가로 자산을 배분받아 자산이 점점 늘어난다. <br />
+작업증명 방식과 달리 증명 연산의 부하가 작아 블록 생성에 필요한 시간이 적은 편이다. <br /></p>
+
+<h2 id="스마트-컨트랙트">스마트 컨트랙트</h2>
+
+<p>스마트 컨트랙트는 블록체인 안에서 실행되는 함수와 같다. <br />
+특정 조건이 충족되면 사전 정의된 작업을 실행하는 방식으로, <strong>작업이 미리 정의된 상태로 블록체인에 저장되어 조건 변경이 불가능</strong>하다. <br />
+사람 사이의 계약은 당사자 간의 의견 차이나 계약 위반을 대비해서 공증 과정이 필요하지만, 스마트 컨트랙트는 생성 시점에 조건을 설정하고 조건 충족 시 자동으로 작업이 실행되어 <strong>공증 없는 P2P 계약</strong>이 가능하다. <br />
+스마트 컨트랙트의 투명성과 작업 실행을 이용하면 여러 기능을 구현할 수 있다. <br /></p>
+
+<h3 id="가스비-대납">가스비 대납</h3>
+
+<p>가스비 대납은 트랜잭션 생성 시 발생하는 <strong>네트워크 가스비를 트랜잭션 생성자 외의 제3자가 지불</strong>하는 방식을 말한다.<br />
+이 방식은 특정 서비스 안에서 발생하는 트랜잭션 비용을 서비스가 대신 납부하기 위해 사용한다. <br />
+사용자는 가스비를 직접 낼 필요가 없기 때문에 트랜잭션 생성에 대한 확인을 마치면 바로 전송하며, 해당 트랜잭션은 가스비 대납 스마트 컨트랙트에서 서비스 계정에 가스비를 청구한 뒤 네트워크에 기록한다. <br /></p>
+
+<h3 id="자동-토큰-발행">자동 토큰 발행</h3>
+
+<p>자동 토큰 발행 방식으로도 스마트 컨트랙트를 활용할 수 있다. <br />
+기본적인 구조가 A 충족, B 실행 이므로 조건으로 자산 입금, <strong>실행으로 토큰 반환을 설정하면 내가 생성한 토큰을 다른 자산과 일정 비율로 자동 교환</strong>할 수 있다. <br />
+이 방식은 거래소의 Convert 기능 등으로 이용할 수 있다. <br />
+거래소는 예비로 보유중인 토큰을 사용자가 제출하는 토큰과 시장가 또는 자체적인 기준으로 교환하여 반환하는 스마트 컨트랙트를 이용하여 빠른 속도로 사용자가 요청한 토큰을 전달한다. <br />
+사용자는 스마트 컨트랙트가 실행되어 조건 충족 시 자동으로 교환 대상 토큰이 반환될 것을 기대할 수 있기 때문에 거래소의 신뢰도 영향을 줄이며 거래할 수 있다. <br /></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#blockchain" class="page__taxonomy-item p-category" rel="tag">blockchain</a><span class="sep">, </span>
+    
+      <a href="/tags/#software" class="page__taxonomy-item p-category" rel="tag">software</a>
+    
+    </span>
+  </p>
+
+
+  
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software" class="page__taxonomy-item p-category" rel="tag">software</a>
+    
+    </span>
+  </p>
+
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-09T12:00:00+09:00">March 9, 2026</time></p>
+
+
+      </footer>
+
+      
+<section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EA%B3%BC+%EC%8A%A4%EB%A7%88%ED%8A%B8+%EC%BB%A8%ED%8A%B8%EB%9E%99%ED%8A%B8%20https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fblock-chain-and-smart-contract%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fblock-chain-and-smart-contract%2F" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://shine-shaan.github.io/software/block-chain-and-smart-contract/" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EA%B3%BC+%EC%8A%A4%EB%A7%88%ED%8A%B8+%EC%BB%A8%ED%8A%B8%EB%9E%99%ED%8A%B8%20https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fblock-chain-and-smart-contract%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/software/quantum-computer-and-post-quantum-crypto/" class="pagination--pager" title="양자내성암호와 보안">Previous</a>
+    
+    
+      <a href="/software/introduce-ethereum-layer2-zksync-era/" class="pagination--pager" title="이더리움 L2 네트워크와 ZKsync Era 소개">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/lifestyle/importance-of-history/" rel="permalink">기록의 중요성과 유의미한 기록
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">왜 기록을 해야하고, 어떻게 기록해야 의미 있는가?
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/ethereum-subchain-stability/" rel="permalink">이더리움 L2 네트워크의 운영 안정성
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">이더리움 시스템을 복제하여 운영하는 Layer 2 체인의 운영 안정성과 전용 RPC 노드의 필요성
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/introduce-ethereum-layer2-zksync-era/" rel="permalink">이더리움 L2 네트워크와 ZKsync Era 소개
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">이더리움의 검증 능력을 차용하며 비용과 속도 측면의 사용성을 높이는 Layer 2 네트워크, 영지식 검증 방식을 이용해 데이터 검증 능력을 극대화하는 ZKsync Era
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/quantum-computer-and-post-quantum-crypto/" rel="permalink">양자내성암호와 보안
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">양자컴퓨터를 이용한 해킹 방어 암호, 하지만 모든 보안이 양자내성암호를 사용할 필요는 없다?
+</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        
+<div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://shine-shaan.github.io/privacy/" rel="nofollow noopener noreferrer"><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy Policy</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://shine-shaan.github.io">Shaan Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NE51XQKB89"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NE51XQKB89', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

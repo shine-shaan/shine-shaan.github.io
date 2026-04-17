@@ -1,0 +1,849 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="ko-KR" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>GoLang, Mongo Driver - Shaan Blog</title>
+<meta name="description" content="Python 프로젝트에서 데이터베이스로 Mongo를 주로 이용해 왔다.">
+
+
+  <meta name="author" content="Shaan Lee">
+  
+  <meta property="article:author" content="Shaan Lee">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Shaan Blog">
+<meta property="og:title" content="GoLang, Mongo Driver">
+<meta property="og:url" content="https://shine-shaan.github.io/software/golang-mongo-driver/">
+
+
+  <meta property="og:description" content="Python 프로젝트에서 데이터베이스로 Mongo를 주로 이용해 왔다.">
+
+
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-04-26T00:00:00+09:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://shine-shaan.github.io/software/golang-mongo-driver/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Shaan Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3386046731537333"
+     crossorigin="anonymous"></script>
+<meta name="google-site-verification" content="mcVX_1eVNAtuUkRvS_IZp8d2YLlIfMYfCh_kZTXdHN0" />
+<meta name="naver-site-verification" content="bf2cad0ec300604ff64f61fc0763e733f697485c" />
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Shaan Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/posts/"
+                
+                
+              >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://shine-shaan.github.io/">
+        <img src="/assets/images/shine-shaan-profile.jpg" alt="Shaan Lee" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://shine-shaan.github.io/" itemprop="url">Shaan Lee</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>도전하고 배워가는 과정을 기록</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/in/%EC%84%B8%ED%98%84-%EC%9D%B4-a35842281/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GoLang, Mongo Driver">
+    <meta itemprop="description" content="Python 프로젝트에서 데이터베이스로 Mongo를 주로 이용해 왔다.">
+    <meta itemprop="datePublished" content="2025-04-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://shine-shaan.github.io/software/golang-mongo-driver/" itemprop="url">GoLang, Mongo Driver
+</a>
+          </h1>
+          
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Python 프로젝트에서 데이터베이스로 Mongo를 주로 이용해 왔다.</p>
+
+<p>Go에서도 Mongo 데이터베이스를 이용해보려 한다.
+<br />
+<br /></p>
+
+<hr />
+
+<h2 id="mongo-특징">Mongo 특징</h2>
+<p>Mongo는 No-sql 데이터베이스다.</p>
+
+<p>sql 데이터베이스(MySQL, Postgre)와 달리 데이터 구조를 명시하고 타입을 지정하지 않고 다양한 형태의 데이터가 저장된다.</p>
+
+<p>Mongo 데이터는 document 형태로 저장되는데, 단어 그대로 문서처럼 저장된다는 뜻이다.</p>
+
+<p>Mongo document는 BSON, (binary JSON) 타입의 문서인데,</p>
+
+<p>java-script 데이터 전달을 위해 만들어진 JSON을 binary 형태의 데이터가 입력되도록 변형된 타입이다.<br /></p>
+
+<hr />
+
+<h2 id="go---mongo-driver">Go - Mongo driver</h2>
+<p>Go에서 이용할 수 있는 Mongo driver는 공식적으로 지원되고 있다.</p>
+
+<p>https://www.mongodb.com/ko-kr/docs/drivers/go/current/</p>
+
+<p>MongoDB 고 (Go) 드라이버 - 고 (Go) 드라이버 v2.2 - MongoDB Docs<br />
+https://www.mongodb.com/ko-kr/docs/drivers/go/current/ 
+공식 문서를 이용해 Mongodb와 Go 프로젝트를 연결해 보겠다.<br /></p>
+
+<hr />
+
+<h2 id="mongo-connect">Mongo Connect</h2>
+<p>Mongodb는 docker compose를 이용해 컨테이너로 실행한 상태이고,</p>
+
+<p>docker compose 파일 예시는 아래와 같다.<br /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
+
+  mongo:
+
+    image: mongo:8.0.8-noble
+
+    container_name: mongo
+
+    ports:
+
+      - 27017:27017
+
+    volumes:
+
+      - mongo-data:/data/db
+
+      - mongo-setting:/data/configdb
+
+    environment:
+
+      MONGO_INITDB_ROOT_USERNAME: &lt;user name&gt;
+
+      MONGO_INITDB_ROOT_PASSWORD: &lt;user password&gt;
+
+    command: mongod --auth
+
+volumes:
+
+  mongo-data:
+
+    external: false
+
+  mongo-setting:
+
+    external: false
+</code></pre></div></div>
+
+<p>현재 설정 상, localhost의 포트 27017로 Mongodb에 접근할 수 있다.</p>
+
+<p>environment에 입력한 user name과 user password를 적용하면 Mongodb 접속을 위한 uri를 작성할 수 있다.</p>
+
+<p>“mongodb://<user name="">:<user password="">@localhost:27017"</user></user></p>
+
+<p>uri를 Mongo driver에 입력하고 반환값을 받는 Go 코드는 아래와 같다.</p>
+
+<p>client, err := mongo.Connect(options.Client(). ApplyURI(uri))<br /></p>
+
+<hr />
+
+<h2 id="mongo-client">Mongo Client</h2>
+<p>위 과정을 통해 Mongodb와 연결을 성공하면, 반환값으로 client를 얻게 된다.</p>
+
+<p>Mongo client는 database 및 collection 접근을 위한 필수 연결점이다.<br /></p>
+
+<hr />
+
+<h2 id="mongo-database-collection-접근">Mongo database, collection 접근</h2>
+<p>client를 이용하면 database와 collection에 접근할 수 있다.</p>
+
+<p>(client), (database), (collection) 관계는 client -&gt; database -&gt; collection으로, 순서대로 접근한다.</p>
+
+<p>database를 얻는 방법은 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>database := client.Database(&lt;database name&gt;)
+</code></pre></div></div>
+
+<p>collection을 얻는 방법은 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collection := database.Collection(&lt;collection name&gt;)&lt;br/&gt;
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="mongo-crud">Mongo CRUD</h2>
+<p>데이터를 읽고 쓰는 작업을 CRUD(create, read, update, delete)라고 한다.</p>
+
+<p>위에서 얻은 collection을 이용해 CRUD 하는 방법은 아래와 같다.<br /></p>
+
+<h3 id="createinsert">create(insert)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>doc := &lt;입력할 데이터 구조체&gt;
+
+collection.InsertOne(context.TODO(), doc)
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="read">read</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>filter := &lt;데이터를 찾기 위한 조건 (예: ID 또는 고유 조합 값)&gt;
+
+collection.FindOne(context.TODO(), filter)
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="update">update</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>filter := &lt;데이터를 찾기 위한 조건 (예: ID 또는 고유 조합 값)&gt;
+
+update := &lt;업데이트할 내용 (Set, Push 등의 연산자 사용)&gt;
+
+collection.UpdateOne(context.TODO(), filter, update)
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="delete">delete</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>filter := &lt;데이터를 찾기 위한 조건 (예: ID 또는 고유 조합 값)&gt;
+
+collection.DeleteOne(context.TODO(), filter)
+
+Find(FindOne과 다름) 반환값으로는 cursor를 얻게 되며, cursor를 통해 documentId를 얻을 수 있다.
+</code></pre></div></div>
+<p><br /></p>
+
+<hr />
+
+<h2 id="-바다코끼리-연산자">:= 바다코끼리 연산자</h2>
+<p>Go에서는 Python처럼 := 연산자를 이용할 수 있다.</p>
+
+<p>모양이 바다코끼리와 비슷해서 바다코끼리(walrus) 연산자라고 부른다.</p>
+
+<p>이 연산자를 이용해 할당한 변수는 변수 할당과 동시에 이용할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ex) if isWalrus := checkIsWalrus(walrus) {...}
+</code></pre></div></div>
+<p>예시에서는 if 조건으로 isWalrus를 이용하는 동시에 isWalrus에 checkIsWalrus 함수 반환값을 할당한다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#golang" class="page__taxonomy-item p-category" rel="tag">golang</a><span class="sep">, </span>
+    
+      <a href="/tags/#mongo" class="page__taxonomy-item p-category" rel="tag">mongo</a>
+    
+    </span>
+  </p>
+
+
+  
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software" class="page__taxonomy-item p-category" rel="tag">software</a>
+    
+    </span>
+  </p>
+
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-04-26T00:00:00+09:00">April 26, 2025</time></p>
+
+
+      </footer>
+
+      
+<section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=GoLang%2C+Mongo+Driver%20https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fgolang-mongo-driver%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fgolang-mongo-driver%2F" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://shine-shaan.github.io/software/golang-mongo-driver/" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=GoLang%2C+Mongo+Driver%20https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fgolang-mongo-driver%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/software/golang-variable-type-change/" class="pagination--pager" title="GoLang, 변수 타입 변환">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/lifestyle/importance-of-history/" rel="permalink">기록의 중요성과 유의미한 기록
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">왜 기록을 해야하고, 어떻게 기록해야 의미 있는가?
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/ethereum-subchain-stability/" rel="permalink">이더리움 L2 네트워크의 운영 안정성
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">이더리움 시스템을 복제하여 운영하는 Layer 2 체인의 운영 안정성과 전용 RPC 노드의 필요성
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/introduce-ethereum-layer2-zksync-era/" rel="permalink">이더리움 L2 네트워크와 ZKsync Era 소개
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">이더리움의 검증 능력을 차용하며 비용과 속도 측면의 사용성을 높이는 Layer 2 네트워크, 영지식 검증 방식을 이용해 데이터 검증 능력을 극대화하는 ZKsync Era
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/block-chain-and-smart-contract/" rel="permalink">블록체인과 스마트 컨트랙트
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">블록체인 안의 함수, 스마트 컨트랙트
+</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        
+<div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://shine-shaan.github.io/privacy/" rel="nofollow noopener noreferrer"><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy Policy</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://shine-shaan.github.io">Shaan Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NE51XQKB89"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NE51XQKB89', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,776 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="ko-KR" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>GoLang, bcrypt 비밀번호 보안 - Shaan Blog</title>
+<meta name="description" content="웹 서비스를 이용할 때, 비밀번호를 등록해서 로그인 인증을 하는 경우가 많다.">
+
+
+  <meta name="author" content="Shaan Lee">
+  
+  <meta property="article:author" content="Shaan Lee">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Shaan Blog">
+<meta property="og:title" content="GoLang, bcrypt 비밀번호 보안">
+<meta property="og:url" content="https://shine-shaan.github.io/software/golang-bcrypt/">
+
+
+  <meta property="og:description" content="웹 서비스를 이용할 때, 비밀번호를 등록해서 로그인 인증을 하는 경우가 많다.">
+
+
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-10T00:00:00+09:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://shine-shaan.github.io/software/golang-bcrypt/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Shaan Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3386046731537333"
+     crossorigin="anonymous"></script>
+<meta name="google-site-verification" content="mcVX_1eVNAtuUkRvS_IZp8d2YLlIfMYfCh_kZTXdHN0" />
+<meta name="naver-site-verification" content="bf2cad0ec300604ff64f61fc0763e733f697485c" />
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Shaan Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/posts/"
+                
+                
+              >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://shine-shaan.github.io/">
+        <img src="/assets/images/shine-shaan-profile.jpg" alt="Shaan Lee" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://shine-shaan.github.io/" itemprop="url">Shaan Lee</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>도전하고 배워가는 과정을 기록</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/in/%EC%84%B8%ED%98%84-%EC%9D%B4-a35842281/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GoLang, bcrypt 비밀번호 보안">
+    <meta itemprop="description" content="웹 서비스를 이용할 때, 비밀번호를 등록해서 로그인 인증을 하는 경우가 많다.">
+    <meta itemprop="datePublished" content="2025-05-10T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://shine-shaan.github.io/software/golang-bcrypt/" itemprop="url">GoLang, bcrypt 비밀번호 보안
+</a>
+          </h1>
+          
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>웹 서비스를 이용할 때, 비밀번호를 등록해서 로그인 인증을 하는 경우가 많다.</p>
+
+<p>우리가 입력한 비밀번호가 그대로 데이터베이스에 저장된다면 어떤 일이 일어날까?</p>
+
+<p>데이터베이스의 단편적인 정보 유출로 유저 권한을 탈취당한다.</p>
+
+<p>이런 일을 방지하기 위해서 로그인 비밀번호 등의 민감 정보는 암호화하는 과정이 필요하다.</p>
+
+<p><br /></p>
+
+<h2 id="hash">HASH</h2>
+<p>해시는 원본 데이터를 해쉬 함수를 이용해 변환한 결과값을 말한다.</p>
+
+<p>해시는 단방향성 암호화 기능이기 때문에, 변환된 해시 데이터로부터 원본을 얻을 수 없다.</p>
+
+<p>아래는 문자열에 SHA256 알고리즘을 이용해 해시로 변환하는 과정이다.</p>
+
+<p>원본 데이터 = “샨 LIP n BIP”</p>
+
+<p>—-해시 함수 적용—&gt;</p>
+
+<p>변환 데이터 = “12f497ac02bbe138b507ff746d7024b79e33e4614e2cab908f371c85fe10b2d3”</p>
+
+<h2 id="hash-algorithm">HASH ALGORITHM</h2>
+<p>해시 알고리즘은 상황에 맞는 여러 선택지가 있다.</p>
+
+<p>정보의 중요성이나 변환 속도를 고려해 적절한 알고리즘을 선택해야한다.</p>
+
+<p>많은 서비스에서 이용하는 해시 알고리즘은 SHA-256이다.
+<br /></p>
+
+<h3 id="md5">MD5</h3>
+
+<p>128비트 해시 값을 생성한다.</p>
+
+<p>과거에 널리 사용되었으나, 현재는 심각한 보안 취약점 (충돌 공격에 취약)이 발견되어 보안 용도로는 사용하지 않는 것이 좋다.</p>
+
+<p>파일 무결성 검사 등 간단한 용도로는 여전히 사용될 수 있다.
+<br /></p>
+
+<h3 id="sha-256">SHA-256</h3>
+
+<p>256비트 해시 값을 생성하며, 현재 가장 널리 사용되는 안전한 해시 알고리즘 중 하나다.</p>
+
+<p>블록체인 기술(예: 비트코인)에서 주로 사용한다.
+<br /></p>
+
+<h3 id="ripemd-160">RIPEMD-160</h3>
+
+<p>RIPEMD-160은 160비트 해시 값을 생성하며, SHA-1과 유사한 보안 수준을 제공하는 것으로 알려져 있다.
+<br /></p>
+
+<h3 id="whirlpool">Whirlpool</h3>
+
+<p>512비트 해시 값을 생성하며, 강력한 보안성을 목표로 한다.
+<br /></p>
+
+<h2 id="bcrypt-package">bcrypt package</h2>
+<p>GO에서 이용할 수 있는 패키지 중, 해시 함수를 지원하는 것이 있다.</p>
+
+<p>bcrypt 패키지는 비밀번호 암호화를 중점으로 둔 패키지로, 주요한 3가지 함수가 노출되어 있다.</p>
+
+<p>https://pkg.go.dev/golang.org/x/crypto@v0.37.0/bcrypt</p>
+
+<h3 id="generatefrompassword">GenerateFromPassword</h3>
+
+<p>주어진 비밀번호 문자열을 원본으로 이용해 해쉬 데이터를 반환한다.
+<br /></p>
+
+<h3 id="comparehashandpassword">CompareHashAndPassword</h3>
+
+<p>저장된 해쉬 데이터와 비밀번호 문자열에서 얻은 해쉬 데이터를 비교해 비밀번호를 비교한다.
+<br /></p>
+
+<h3 id="cost">Cost</h3>
+
+<p>해쉬 데이터를 만들기 위해 사용된 Cost를 반환한다.</p>
+
+<p>GenerateFromPassword 함수에는 Cost라는 인자가 전달되어야 한다.(4부터 31)</p>
+
+<p>Cost가 클수록 더 긴 해시가 생성되어 보안이 강화되는 대신, 컴퓨팅 비용이 증가한다.(Cost 값 만큼 해쉬 알고리즘이 반복되기 때문)
+<br /></p>
+
+<p>bcrypt가 유용한 이유는, 해시 데이터로 변환하기 전 원본 데이터에 salt라고 부르는 문자열을 삽입하는 기능과 Cost를 이용한 반복 해싱 때문이다.</p>
+
+<p>salt가 삽입되면, 해시 데이터가 완전히 달라지기 때문에 무차별 대입으로부터 보안을 강화할 수 있다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#golang" class="page__taxonomy-item p-category" rel="tag">golang</a><span class="sep">, </span>
+    
+      <a href="/tags/#password" class="page__taxonomy-item p-category" rel="tag">password</a><span class="sep">, </span>
+    
+      <a href="/tags/#secure" class="page__taxonomy-item p-category" rel="tag">secure</a>
+    
+    </span>
+  </p>
+
+
+  
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software" class="page__taxonomy-item p-category" rel="tag">software</a>
+    
+    </span>
+  </p>
+
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-05-10T00:00:00+09:00">May 10, 2025</time></p>
+
+
+      </footer>
+
+      
+<section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=GoLang%2C+bcrypt+%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8+%EB%B3%B4%EC%95%88%20https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fgolang-bcrypt%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fgolang-bcrypt%2F" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://shine-shaan.github.io/software/golang-bcrypt/" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=GoLang%2C+bcrypt+%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8+%EB%B3%B4%EC%95%88%20https%3A%2F%2Fshine-shaan.github.io%2Fsoftware%2Fgolang-bcrypt%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/software/golang-fiber/" class="pagination--pager" title="GoLang, Fiber 프레임워크">Previous</a>
+    
+    
+      <a href="/software/golang-mongo-index/" class="pagination--pager" title="GoLang, Mongo Index">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/lifestyle/importance-of-history/" rel="permalink">기록의 중요성과 유의미한 기록
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">왜 기록을 해야하고, 어떻게 기록해야 의미 있는가?
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/ethereum-subchain-stability/" rel="permalink">이더리움 L2 네트워크의 운영 안정성
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">이더리움 시스템을 복제하여 운영하는 Layer 2 체인의 운영 안정성과 전용 RPC 노드의 필요성
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/introduce-ethereum-layer2-zksync-era/" rel="permalink">이더리움 L2 네트워크와 ZKsync Era 소개
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">이더리움의 검증 능력을 차용하며 비용과 속도 측면의 사용성을 높이는 Layer 2 네트워크, 영지식 검증 방식을 이용해 데이터 검증 능력을 극대화하는 ZKsync Era
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/block-chain-and-smart-contract/" rel="permalink">블록체인과 스마트 컨트랙트
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">블록체인 안의 함수, 스마트 컨트랙트
+</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        
+<div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://shine-shaan.github.io/privacy/" rel="nofollow noopener noreferrer"><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy Policy</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://shine-shaan.github.io">Shaan Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NE51XQKB89"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NE51XQKB89', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
