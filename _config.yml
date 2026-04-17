@@ -1,4 +1,4 @@
-url: https://shine-shaan.github.io/
+url: "https://shine-shaan.github.io/"
 baseurl: ""
 locale: ko-KR
 title: Shaan Blog
@@ -38,7 +38,7 @@ author:
       url: "https://www.linkedin.com/in/%EC%84%B8%ED%98%84-%EC%9D%B4-a35842281/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/shine-shaan"
+      url: "https://github.com/shine-shaan/"
 
 footer:
   links:
