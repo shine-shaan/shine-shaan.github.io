@@ -15,7 +15,7 @@ tags: ["golang","password","secure"]
 
 <br/>
 
-# HASH
+## HASH
 해시는 원본 데이터를 해쉬 함수를 이용해 변환한 결과값을 말한다.
 
 해시는 단방향성 암호화 기능이기 때문에, 변환된 해시 데이터로부터 원본을 얻을 수 없다.
@@ -30,7 +30,7 @@ tags: ["golang","password","secure"]
 
 
 
-# HASH ALGORITHM
+## HASH ALGORITHM
 해시 알고리즘은 상황에 맞는 여러 선택지가 있다.
 
 정보의 중요성이나 변환 속도를 고려해 적절한 알고리즘을 선택해야한다.
@@ -38,7 +38,7 @@ tags: ["golang","password","secure"]
 많은 서비스에서 이용하는 해시 알고리즘은 SHA-256이다.
 <br/>
 
-## MD5
+### MD5
 
 128비트 해시 값을 생성한다.
 
@@ -47,42 +47,42 @@ tags: ["golang","password","secure"]
 파일 무결성 검사 등 간단한 용도로는 여전히 사용될 수 있다.
 <br/>
 
-## SHA-256
+### SHA-256
 
 256비트 해시 값을 생성하며, 현재 가장 널리 사용되는 안전한 해시 알고리즘 중 하나다. 
 
 블록체인 기술(예: 비트코인)에서 주로 사용한다.
 <br/>
 
-## RIPEMD-160
+### RIPEMD-160
 
 RIPEMD-160은 160비트 해시 값을 생성하며, SHA-1과 유사한 보안 수준을 제공하는 것으로 알려져 있다.
 <br/>
 
-## Whirlpool
+### Whirlpool
 
 512비트 해시 값을 생성하며, 강력한 보안성을 목표로 한다.
 <br/>
 
 
-# bcrypt package
+## bcrypt package
 GO에서 이용할 수 있는 패키지 중, 해시 함수를 지원하는 것이 있다.
 
 bcrypt 패키지는 비밀번호 암호화를 중점으로 둔 패키지로, 주요한 3가지 함수가 노출되어 있다.
 
 https://pkg.go.dev/golang.org/x/crypto@v0.37.0/bcrypt
 
-## GenerateFromPassword
+### GenerateFromPassword
 
 주어진 비밀번호 문자열을 원본으로 이용해 해쉬 데이터를 반환한다.
 <br/>
 
-## CompareHashAndPassword
+### CompareHashAndPassword
 
 저장된 해쉬 데이터와 비밀번호 문자열에서 얻은 해쉬 데이터를 비교해 비밀번호를 비교한다.
 <br/>
 
-## Cost
+### Cost
 
 해쉬 데이터를 만들기 위해 사용된 Cost를 반환한다.
 
