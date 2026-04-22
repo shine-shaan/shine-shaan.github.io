@@ -94,4 +94,10 @@ var store = [{
         "tags": ["history","logging"],
         "url": "/lifestyle/importance-of-history/",
         "teaser": null
+      },{
+        "title": "이더리움의 계정 추상화, 네이티브 계정 추상화",
+        "excerpt":"계정 추상화 계정 추상화는 프로그래밍 함수를 포괄적으로 사용할 수 있도록 기능을 일반화할 때 사용하는 추상화와 같은 의미로 계정을 변환하는 방식을 말한다. 추상 계정은 특정 목적으로 사전 정의되어 있는 기능 외에 상황에 따라 요구하는 추가 기능을 사용할 수 있는 유연한 기능 범위를 가지게 되어 프로그래밍 가능한 계정으로 변화한다. 예를 들면, 자산의...","categories": ["software"],
+        "tags": ["software","blockchain"],
+        "url": "/software/ethereum-native-acount-abstract/",
+        "teaser": null
       }]
