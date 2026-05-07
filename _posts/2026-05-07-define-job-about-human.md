@@ -95,4 +95,4 @@ date: 2026-05-07 12:00:00 +09:00
 
 추후 아래 도메인을 통해 서비스를 제공할 예정이다.
 
-[STRIGIFIC 정보 소유 플랫폼](strigific.com)
+[STRIGIFIC 정보 소유 플랫폼](https://strigific.com)
