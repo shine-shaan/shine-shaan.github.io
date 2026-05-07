@@ -47,7 +47,7 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/shine-shaan"
     - label: "Privacy Policy"
-      url: "https://shine-shaan.github.io/privacy/"
+      url: "https://blog.sciencebro.kr/privacy/"
       icon: "fas fa-user-shield"
 
 defaults:
@@ -85,4 +85,4 @@ indexnow:
   endpoint: https://api.indexnow.org
   key: 946075e467535a78ee1844ec9b49bc73414914b9a86138449ddcefc151969482
   url_scheme: https
-  host: shine-shaan.github.io
+  host: blog.sciencebro.kr
