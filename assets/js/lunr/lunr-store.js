@@ -100,4 +100,10 @@ var store = [{
         "tags": ["software","blockchain"],
         "url": "/software/ethereum-native-acount-abstract/",
         "teaser": null
+      },{
+        "title": "직업의 변화, 정보 우위",
+        "excerpt":"기술과 문화의 발전에 따라 직업도 변해왔다 과거에는 시간에 맞춰 첨탑의 종을 울려 마을 전체가 공통적인 생활을 할 수 있도록 돕는 직업이 존재했다. 이 직업은 기계의 발전과 동력 기관 비용이 저렴해짐에 따라 더 정확하고 편리한 기계식 알림 방식이 확산되며, 현재는 일부의 이벤트성 문화로 남아 종사하는 사람이 매우 적어졌다. 우리는 앞으로 발전하는...","categories": ["lifestyle"],
+        "tags": ["service","ai"],
+        "url": "/lifestyle/define-job-about-human/",
+        "teaser": null
       }]
