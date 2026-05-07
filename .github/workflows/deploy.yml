@@ -34,5 +34,5 @@ jobs:
       # 배포 성공 후 IndexNow API에 직접 알림 전송
       - name: Notify IndexNow
         run: |
-          curl -X GET "https://api.indexnow.org/indexnow?url=https://shine-shaan.github.io/&key=${{ secrets.INDEXNOW_KEY }}&keyLocation=https://shine-shaan.github.io/${{ secrets.INDEXNOW_KEY }}.txt"
+          curl -X GET "https://api.indexnow.org/indexnow?url=https://blog.sciencebro.kr/&key=${{ secrets.INDEXNOW_KEY }}&keyLocation=https://blog.sciencebro.kr/${{ secrets.INDEXNOW_KEY }}.txt"
       
