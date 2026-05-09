@@ -5,8 +5,8 @@
     <description>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</description>
     <link>https://blog.sciencebro.kr/</link>
     <atom:link href="https://blog.sciencebro.kr/rss.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 07 May 2026 17:30:48 +0900</pubDate>
-    <lastBuildDate>Thu, 07 May 2026 17:30:48 +0900</lastBuildDate>
+    <pubDate>Sat, 09 May 2026 13:38:47 +0900</pubDate>
+    <lastBuildDate>Sat, 09 May 2026 13:38:47 +0900</lastBuildDate>
     
     <item>
       <title>직업의 변화, 정보 우위</title>
@@ -26,12 +26,18 @@
 
 &lt;ul&gt;
   &lt;li&gt;육체 노동의 종류
-  - 물품의 전달, 분류
-  - 원료를 가공하여 물품 생산&lt;/li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;물품의 전달, 분류&lt;/li&gt;
+      &lt;li&gt;원료를 가공하여 물품 생산&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
   &lt;li&gt;지식 노동의 종류
-  - 정보를 가공하여 기록
-  - 지식을 표현하여 확산
-  - 지식을 이용한 대행&lt;/li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;정보를 가공하여 기록&lt;/li&gt;
+      &lt;li&gt;지식을 표현하여 확산&lt;/li&gt;
+      &lt;li&gt;지식을 이용한 대행&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;우리 사회는 과거 육체 노동이 주요한 문화에서, 정보통신의 발전으로 점차 지식 노동이 주요한 문화로 변화했다.&lt;/p&gt;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://blog.sciencebro.kr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sciencebro.kr/" rel="alternate" type="text/html" /><updated>2026-05-07T17:30:48+09:00</updated><id>https://blog.sciencebro.kr/feed.xml</id><title type="html">Shaan Blog</title><subtitle>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</subtitle><author><name>Shaan Lee</name></author><entry><title type="html">직업의 변화, 정보 우위</title><link href="https://blog.sciencebro.kr/lifestyle/define-job-about-human/" rel="alternate" type="text/html" title="직업의 변화, 정보 우위" /><published>2026-05-07T12:00:00+09:00</published><updated>2026-05-07T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/lifestyle/define-job-about-human</id><content type="html" xml:base="https://blog.sciencebro.kr/lifestyle/define-job-about-human/"><![CDATA[<h2 id="기술과-문화의-발전에-따라-직업도-변해왔다">기술과 문화의 발전에 따라 직업도 변해왔다</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://blog.sciencebro.kr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sciencebro.kr/" rel="alternate" type="text/html" /><updated>2026-05-09T13:38:47+09:00</updated><id>https://blog.sciencebro.kr/feed.xml</id><title type="html">Shaan Blog</title><subtitle>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</subtitle><author><name>Shaan Lee</name></author><entry><title type="html">직업의 변화, 정보 우위</title><link href="https://blog.sciencebro.kr/lifestyle/define-job-about-human/" rel="alternate" type="text/html" title="직업의 변화, 정보 우위" /><published>2026-05-07T12:00:00+09:00</published><updated>2026-05-07T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/lifestyle/define-job-about-human</id><content type="html" xml:base="https://blog.sciencebro.kr/lifestyle/define-job-about-human/"><![CDATA[<h2 id="기술과-문화의-발전에-따라-직업도-변해왔다">기술과 문화의 발전에 따라 직업도 변해왔다</h2>
 
 <p>과거에는 시간에 맞춰 첨탑의 종을 울려 마을 전체가 공통적인 생활을 할 수 있도록 돕는 직업이 존재했다.</p>
 
@@ -14,12 +14,18 @@
 
 <ul>
   <li>육체 노동의 종류
-  - 물품의 전달, 분류
-  - 원료를 가공하여 물품 생산</li>
+    <ul>
+      <li>물품의 전달, 분류</li>
+      <li>원료를 가공하여 물품 생산</li>
+    </ul>
+  </li>
   <li>지식 노동의 종류
-  - 정보를 가공하여 기록
-  - 지식을 표현하여 확산
-  - 지식을 이용한 대행</li>
+    <ul>
+      <li>정보를 가공하여 기록</li>
+      <li>지식을 표현하여 확산</li>
+      <li>지식을 이용한 대행</li>
+    </ul>
+  </li>
 </ul>
 
 <p>우리 사회는 과거 육체 노동이 주요한 문화에서, 정보통신의 발전으로 점차 지식 노동이 주요한 문화로 변화했다.</p>
