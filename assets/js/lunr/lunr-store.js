@@ -106,4 +106,10 @@ var store = [{
         "tags": ["service","ai"],
         "url": "/lifestyle/define-job-about-human/",
         "teaser": null
+      },{
+        "title": "현대적인 업무 방식",
+        "excerpt":"산업혁명 시대의 근로 산업혁명 시대에는 물품들이 공장에서 제조되기 시작하며 생산 속도와 생산량에 큰 변화가 나타났다. 공장에서 생산되는 물품들은 일정한 공장 가동 주기에 맞춰 작업자가 재료를 투입하거나 완성품을 출하하는 등 기계와 수많은 사람들의 유기적 협력이 필요했다. 이러한 협업 방식이 고정된 시간제 형태로 굳어지며 9시 출근, 6시 퇴근 방식인 ‘9to6’ 가 업무...","categories": ["lifestyle"],
+        "tags": ["service"],
+        "url": "/lifestyle/modern-office-type/",
+        "teaser": null
       }]
