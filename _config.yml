@@ -82,7 +82,7 @@ analytics:
     tracking_id: "G-NE51XQKB89"
 
 indexnow:
-  endpoint: https://api.indexnow.org
+  endpoint: https://api.indexnow.org/indexnow
   key: 946075e467535a78ee1844ec9b49bc73414914b9a86138449ddcefc151969482
   url_scheme: https
   host: blog.sciencebro.kr
