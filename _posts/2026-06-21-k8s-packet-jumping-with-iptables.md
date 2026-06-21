@@ -27,7 +27,7 @@ Pod는 K8s 안에서 사용하는 가상 환경 단위이다.
 
 이미지는 docker에서도 사용하는데, 사전 구성된 실행 명령어와 실행 파일을 가진 채 배포할 수 있는 파일을 말한다.
 
-개별 Pod는 고유한 ID를 가지고 클러스터 안에서 실행된다. _( {svc name}-{Pod ID} )_
+개별 Pod는 고유한 ID를 가지고 클러스터 안에서 실행된다. _{svc name}-{Pod ID}_
 
 
 ### svc
@@ -64,11 +64,13 @@ PREROUTING 과정에서 요청의 목적지가 변환되면, iptables의 FORWARD
 
 ### iptables
 
-iptables는 os수준에서 사전 정의된 IP로 보내거나 받는 요청을 조율할 수 있다.
+iptables는 커널 수준에서 사전 정의된 IP로 보내거나 받는 요청을 조율할 수 있다.
 
 iptables는 규칙을 저장해 어떤 IP를 목적지로 하는 요청에 어떤 조율을 할지 정의하며, 실제 요청을 가공하는 작업은 netfilter가 수행한다.
 
 iptables로 지정할 수 있는 규칙은 __[ACCEPT, DROP, REJECT, LOG]__ 등이 있으며, 규칙을 적용하는 대상을 구분하는 종류는 __[PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTING]__, 작업을 구분하는 종류는 __[filter, nat, mangle, raw]__ 이 있다.
+
+iptables 규칙과 별개로, INPUT 단계에서 호스트로 전달된 요청의 port를 호스트가 허용하지 않는 경우 요청은 거절된다.
 
 ````markdown
 ACCEPT : 패킷 통과 허용, 요청에 대한 응답 정상 반환
