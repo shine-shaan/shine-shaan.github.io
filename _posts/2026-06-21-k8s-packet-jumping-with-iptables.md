@@ -1,5 +1,5 @@
 ---
-title: 쿠버네티스로 요청을 보내는 과정
+title: 쿠버네티스 서비스의 외부 노출
 excerpt: 노드 IP가 노출된 로컬 쿠버네티스 환경에서 어떻게 각 요청이 쿠버네티스 Cluster IP로 연결될까?
 layout: single
 category: software
