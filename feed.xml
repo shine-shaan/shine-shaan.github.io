@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://blog.sciencebro.kr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sciencebro.kr/" rel="alternate" type="text/html" /><updated>2026-06-21T19:51:05+09:00</updated><id>https://blog.sciencebro.kr/feed.xml</id><title type="html">Shaan Blog</title><subtitle>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</subtitle><author><name>Shaan Lee</name></author><entry><title type="html">쿠버네티스 서비스의 외부 노출</title><link href="https://blog.sciencebro.kr/software/k8s-packet-jumping-with-iptables/" rel="alternate" type="text/html" title="쿠버네티스 서비스의 외부 노출" /><published>2026-06-21T12:00:00+09:00</published><updated>2026-06-21T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/software/k8s-packet-jumping-with-iptables</id><content type="html" xml:base="https://blog.sciencebro.kr/software/k8s-packet-jumping-with-iptables/"><![CDATA[<h2 id="클러스터-구성">클러스터 구성</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://blog.sciencebro.kr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sciencebro.kr/" rel="alternate" type="text/html" /><updated>2026-06-21T19:57:10+09:00</updated><id>https://blog.sciencebro.kr/feed.xml</id><title type="html">Shaan Blog</title><subtitle>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</subtitle><author><name>Shaan Lee</name></author><entry><title type="html">쿠버네티스 서비스의 외부 노출</title><link href="https://blog.sciencebro.kr/software/k8s-packet-jumping-with-iptables/" rel="alternate" type="text/html" title="쿠버네티스 서비스의 외부 노출" /><published>2026-06-21T12:00:00+09:00</published><updated>2026-06-21T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/software/k8s-packet-jumping-with-iptables</id><content type="html" xml:base="https://blog.sciencebro.kr/software/k8s-packet-jumping-with-iptables/"><![CDATA[<h2 id="클러스터-구성">클러스터 구성</h2>
 
 <p>클러스터는 쿠버네티스 환경을 구성하는 네트워크 중 가장 큰 단위를 말한다.</p>
 
@@ -16,7 +16,7 @@
 
 <p>이미지는 docker에서도 사용하는데, 사전 구성된 실행 명령어와 실행 파일을 가진 채 배포할 수 있는 파일을 말한다.</p>
 
-<p>개별 Pod는 고유한 ID를 가지고 클러스터 안에서 실행된다. <em>( {svc name}-{Pod ID} )</em></p>
+<p>개별 Pod는 고유한 ID를 가지고 클러스터 안에서 실행된다. <em>{svc name}-{Pod ID}</em></p>
 
 <h3 id="svc">svc</h3>
 
@@ -50,11 +50,13 @@
 
 <h3 id="iptables">iptables</h3>
 
-<p>iptables는 os수준에서 사전 정의된 IP로 보내거나 받는 요청을 조율할 수 있다.</p>
+<p>iptables는 커널 수준에서 사전 정의된 IP로 보내거나 받는 요청을 조율할 수 있다.</p>
 
 <p>iptables는 규칙을 저장해 어떤 IP를 목적지로 하는 요청에 어떤 조율을 할지 정의하며, 실제 요청을 가공하는 작업은 netfilter가 수행한다.</p>
 
 <p>iptables로 지정할 수 있는 규칙은 <strong>[ACCEPT, DROP, REJECT, LOG]</strong> 등이 있으며, 규칙을 적용하는 대상을 구분하는 종류는 <strong>[PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTING]</strong>, 작업을 구분하는 종류는 <strong>[filter, nat, mangle, raw]</strong> 이 있다.</p>
+
+<p>iptables 규칙과 별개로, INPUT 단계에서 호스트로 전달된 요청의 port를 호스트가 허용하지 않는 경우 요청은 거절된다.</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ACCEPT : 패킷 통과 허용, 요청에 대한 응답 정상 반환
 DROP : 패킷 폐기, 송신 클라이언트는 폐기 사실을 모른 채 응답을 대기하게 됨
