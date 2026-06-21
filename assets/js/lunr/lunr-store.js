@@ -113,7 +113,7 @@ var store = [{
         "url": "/lifestyle/modern-office-type/",
         "teaser": null
       },{
-        "title": "쿠버네티스로 요청을 보내는 과정",
+        "title": "쿠버네티스 서비스의 외부 노출",
         "excerpt":"클러스터 구성 클러스터는 쿠버네티스 환경을 구성하는 네트워크 중 가장 큰 단위를 말한다. 노드라고 부르는 개별 서버들의 합집합이 클러스터(K8s pool)이며, 쿠버네티스 안에서 실행되는 각 Pod의 자원 총량은 클러스터 자원을 넘을 수 없다. 클러스터는 여러 노드를 연결해 하나의 네트워크를 형성하며, 논리적으로 로컬 네트워크와 같이 각 Pod가 소통할 수 있도록 한다. 예) Service(서비스,...","categories": ["software"],
         "tags": ["kubernetes","network"],
         "url": "/software/k8s-packet-jumping-with-iptables/",
