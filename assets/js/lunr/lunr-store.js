@@ -118,4 +118,10 @@ var store = [{
         "tags": ["kubernetes","network"],
         "url": "/software/k8s-packet-jumping-with-iptables/",
         "teaser": null
+      },{
+        "title": "다른 사람과 다름을 느낄 때",
+        "excerpt":"나와 다름을 느낄 때 일상생활이나 업무를 하며, 우리는 많은 사람들과 소통한다. 소통 과정에서 나에게 당연한 것이 타인에게는 생소한 경험이기도 하고, 반대의 경우도 있다. 나는 이 일상 속에서 서로의 다름을 느끼고, 이해하려 노력한다. 내가 살아온 지난 시간을 되돌릴 수 없지만 다른 사람이 살아온 지난 시간을 대표하는 현재 모습으로부터 간접 경험할 수...","categories": ["lifestyle"],
+        "tags": ["social","ability"],
+        "url": "/lifestyle/differ-of-your-ability-and-others/",
+        "teaser": null
       }]
