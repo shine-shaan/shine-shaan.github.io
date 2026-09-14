@@ -1,0 +1,926 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.1 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="ko-KR" class="no-js" dir="ltr">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>GNN을 이용한 동일 생물 서열 내 단백질 기능 유추 - Shaan Blog</title>
+<meta name="description" content="생물 서열 내 단백질의 위치 정보와 순차적인 기능 구조를 이용해 미지 단백질의 기능을 유추한다">
+
+
+  <meta name="author" content="Shaan Lee">
+  
+  <meta property="article:author" content="Shaan Lee">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Shaan Blog">
+<meta property="og:title" content="GNN을 이용한 동일 생물 서열 내 단백질 기능 유추">
+<meta property="og:url" content="https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/">
+
+
+  <meta property="og:description" content="생물 서열 내 단백질의 위치 정보와 순차적인 기능 구조를 이용해 미지 단백질의 기능을 유추한다">
+
+
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-06-25T12:00:00+09:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Shaan Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3386046731537333" crossorigin="anonymous"></script>
+<meta name="google-site-verification" content="mcVX_1eVNAtuUkRvS_IZp8d2YLlIfMYfCh_kZTXdHN0" />
+<meta name="naver-site-verification" content="bf2cad0ec300604ff64f61fc0763e733f697485c" />  
+
+<meta name="google-site-verification" content="pFS-krfQuvCb108A2sBsDkgA7JlLwJ76nxqA8EA3Tp4" />
+<meta name="naver-site-verification" content="e2c23e39b763db293035762a01c4651229d887b6" />
+
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>GNN을 이용한 동일 생물 서열 내 단백질 기능 유추 | Shaan Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="GNN을 이용한 동일 생물 서열 내 단백질 기능 유추" />
+<meta name="author" content="Shaan Lee" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="생물 서열 내 단백질의 위치 정보와 순차적인 기능 구조를 이용해 미지 단백질의 기능을 유추한다" />
+<meta property="og:description" content="생물 서열 내 단백질의 위치 정보와 순차적인 기능 구조를 이용해 미지 단백질의 기능을 유추한다" />
+<link rel="canonical" href="https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/" />
+<meta property="og:url" content="https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/" />
+<meta property="og:site_name" content="Shaan Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-06-25T12:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GNN을 이용한 동일 생물 서열 내 단백질 기능 유추" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Shaan Lee"},"dateModified":"2026-06-25T12:00:00+09:00","datePublished":"2026-06-25T12:00:00+09:00","description":"생물 서열 내 단백질의 위치 정보와 순차적인 기능 구조를 이용해 미지 단백질의 기능을 유추한다","headline":"GNN을 이용한 동일 생물 서열 내 단백질 기능 유추","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/"},"url":"https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  </head>
+
+  <body class="layout--single">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Shaan Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/posts/"
+                
+                
+              >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://blog.sciencebro.kr/">
+        <img src="/assets/images/shine-shaan-profile.jpg" alt="Shaan Lee" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://blog.sciencebro.kr/" itemprop="url">Shaan Lee</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>도전하고 배워가는 과정을 기록</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/in/%EC%84%B8%ED%98%84-%EC%9D%B4-a35842281/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/shine-shaan/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GNN을 이용한 동일 생물 서열 내 단백질 기능 유추">
+    <meta itemprop="description" content="생물 서열 내 단백질의 위치 정보와 순차적인 기능 구조를 이용해 미지 단백질의 기능을 유추한다">
+    <meta itemprop="datePublished" content="2026-06-25T12:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/" itemprop="url">GNN을 이용한 동일 생물 서열 내 단백질 기능 유추
+</a>
+          </h1>
+          
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="연구-개요">연구 개요</h2>
+
+<p>박테리아 내부의 박테리오파지 단백질의 기능 분류를 위해 UniProt50(bacteria taxon) 데이터와 ESM-2 8M 모델 임베딩을 활용해 보았습니다.</p>
+
+<p>지식 그래프 구축을 위해 UniProt 데이터를 노드로 추가하고, 임베딩 데이터를 사전 연산하여 벡터 검색이 가능하도록 준비했습니다.</p>
+
+<p>커스텀 데이터로는 일반적으로 파지 영역을 탐색하고, 단백질 기능을 분석하는 도구인 Phastest 를 활용해 얻어낸 파지 영역 단백질을 이용합니다.
+과</p>
+
+<h2 id="연구-상세">연구 상세</h2>
+
+<p>GNN이 단백질 기능 유추에 적합하다고 판단된 이유는, 생물 아미노산 서열에서 번역된 단백질 서열은 조립 순서와 유사한 순서를 가지게 되어 특정 기능 단백질의 주변 영역에서 아미노산 서열 차이보다 안정적인 기준으로 단백질 기능을 사용할 수 있기 때문입니다.</p>
+
+<p>이 경우 동일 종 내의 돌연변이로 인한 아미노산 서열 차이가 생겨도 전체 영역의 기능 변화가 없는 한 주변 단백질과의 관계를 이용해 기능을 유추할 수 있습니다.</p>
+
+<p>ESM-2 를 이용한 단백질 임베딩 벡터를 1차 필터로 사용한 이유는, 아미노산 서열만으로 단백질 관계를 유추하기에 서열 정보의 변동성이 크기 때문입니다.</p>
+
+<p>임베딩 벡터를 사용해 잘 알려진 단백질 정보를 벡터 데이터베이스에 저장 후 분석 대상 단백질의 유사 클러스터를 찾아 GNN의 관계 정보로 사용합니다.</p>
+
+<hr />
+
+<ul>
+  <li>커스텀 데이터 필드
+    <ul>
+      <li>DNA 시퀀스</li>
+      <li>DNA 시퀀스 길이</li>
+      <li>DNA 시작 위치</li>
+      <li>DNA 종료 위치</li>
+      <li>커스텀 기능 주석(타겟 기능에 대한 주석 정보)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>임베딩 벡터를 이용한 클러스터 매칭에 사용된 데이터베이스는 UniProt50 전체를 대상으로 합니다.</p>
+
+<p>주요 타겟 기능은 rbp 이고, rbp 기능은 tail_fiber 하위에 속하는 기능으로 박테리아 표면과 상호작용하는 부위를 의미합니다.</p>
+
+<p>커스텀 데이터 단백질은 서로 앞뒤 관계를 가지고 있습니다. (IS_NEXT_TO, IS_PREVIOUS_TO)</p>
+
+<p>커스텀 데이터의 단백질에 대해 ESM-2 모델의 임베딩을 활용해 UniProt 데이터에서 유사도 상위 50개의 클러스터를 탐색합니다. (유사도 임계값 0.97)</p>
+
+<p>이후 50개의 클러스터 내에서 커스텀 데이터의 시퀀스 길이 대비 0.8 ~ 1.2 배수의 시퀀스를 후보군으로 추려냅니다.</p>
+
+<p>추려진 클러스터를 유사도 기준으로 정렬 후 상위 5개의 클러스터 노드를 커스텀 데이터 노드와 관계짓습니다.(IS_SIMILAR_TO)</p>
+
+<h2 id="연구-결과">연구 결과</h2>
+
+<p>학습 후 평가 결과를 보면, unknown 클래스 불균형에도 불구하고 tape_measure, j, portal_protein 등의 서열 변동이 적은 단백질 유추 성능이 기대됩니다.</p>
+
+<p>Unknown 클래스에서 알려진 기능 단백질을 추가 분류하고, 임베딩 사이즈를 키우는 등의 조정으로 더 나은 성능을 기대할 수 있습니다.</p>
+
+<p>커스텀 데이터에서 라벨링 된 기능이 100개 미만인 경우 유추 성능이 매우 낮은 것을 보완하기 위해 대규모 파지 데이터 및 박테리아 데이터를 이용한 사전 학습이 동반된다면 개별 기능 유추 성능 향상을 기대할 수 있습니다.</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: left">precision</th>
+      <th style="text-align: left">recall</th>
+      <th style="text-align: left">f1-score</th>
+      <th style="text-align: left">support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">unknown</td>
+      <td style="text-align: left">0.94</td>
+      <td style="text-align: left">0.93</td>
+      <td style="text-align: left">0.93</td>
+      <td style="text-align: left">8881</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">rbp</td>
+      <td style="text-align: left">0.65</td>
+      <td style="text-align: left">0.57</td>
+      <td style="text-align: left">0.65</td>
+      <td style="text-align: left">535</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">tape_measure</td>
+      <td style="text-align: left">0.59</td>
+      <td style="text-align: left">0.82</td>
+      <td style="text-align: left">0.68</td>
+      <td style="text-align: left">215</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">holin</td>
+      <td style="text-align: left">0.59</td>
+      <td style="text-align: left">0.52</td>
+      <td style="text-align: left">0.55</td>
+      <td style="text-align: left">161</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">j</td>
+      <td style="text-align: left">0.66</td>
+      <td style="text-align: left">0.90</td>
+      <td style="text-align: left">0.76</td>
+      <td style="text-align: left">151</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">tail_sheath</td>
+      <td style="text-align: left">0.52</td>
+      <td style="text-align: left">0.88</td>
+      <td style="text-align: left">0.65</td>
+      <td style="text-align: left">157</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">integrase</td>
+      <td style="text-align: left">0.83</td>
+      <td style="text-align: left">0.55</td>
+      <td style="text-align: left">0.66</td>
+      <td style="text-align: left">137</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">polymerase</td>
+      <td style="text-align: left">0.77</td>
+      <td style="text-align: left">0.59</td>
+      <td style="text-align: left">0.67</td>
+      <td style="text-align: left">39</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">helicase</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">51</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">terminase</td>
+      <td style="text-align: left">0.55</td>
+      <td style="text-align: left">0.83</td>
+      <td style="text-align: left">0.66</td>
+      <td style="text-align: left">205</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">portal_protein</td>
+      <td style="text-align: left">0.86</td>
+      <td style="text-align: left">0.72</td>
+      <td style="text-align: left">0.79</td>
+      <td style="text-align: left">112</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">capsid</td>
+      <td style="text-align: left">0.49</td>
+      <td style="text-align: left">0.48</td>
+      <td style="text-align: left">0.48</td>
+      <td style="text-align: left">287</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">endolysin</td>
+      <td style="text-align: left">0.26</td>
+      <td style="text-align: left">0.06</td>
+      <td style="text-align: left">0.10</td>
+      <td style="text-align: left">94</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">primase</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">tail_fiber</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">0.00</td>
+      <td style="text-align: left">12</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">accuracy</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">0.87</td>
+      <td style="text-align: left">11038</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">macro avg</td>
+      <td style="text-align: left">0.51</td>
+      <td style="text-align: left">0.52</td>
+      <td style="text-align: left">0.50</td>
+      <td style="text-align: left">11038</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">weighted avg</td>
+      <td style="text-align: left">0.87</td>
+      <td style="text-align: left">0.87</td>
+      <td style="text-align: left">0.86</td>
+      <td style="text-align: left">11038</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#biology" class="page__taxonomy-item p-category" rel="tag">biology</a>
+    
+    </span>
+  </p>
+
+
+  
+
+  
+    
+
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software" class="page__taxonomy-item p-category" rel="tag">software</a>
+    
+    </span>
+  </p>
+
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-25T12:00:00+09:00">June 25, 2026</time></p>
+
+
+      </footer>
+
+      
+<section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=GNN%EC%9D%84+%EC%9D%B4%EC%9A%A9%ED%95%9C+%EB%8F%99%EC%9D%BC+%EC%83%9D%EB%AC%BC+%EC%84%9C%EC%97%B4+%EB%82%B4+%EB%8B%A8%EB%B0%B1%EC%A7%88+%EA%B8%B0%EB%8A%A5+%EC%9C%A0%EC%B6%94%20https%3A%2F%2Fblog.sciencebro.kr%2Fsoftware%2Fprotein-annotation-model-with-gnn%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.sciencebro.kr%2Fsoftware%2Fprotein-annotation-model-with-gnn%2F" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=GNN%EC%9D%84+%EC%9D%B4%EC%9A%A9%ED%95%9C+%EB%8F%99%EC%9D%BC+%EC%83%9D%EB%AC%BC+%EC%84%9C%EC%97%B4+%EB%82%B4+%EB%8B%A8%EB%B0%B1%EC%A7%88+%EA%B8%B0%EB%8A%A5+%EC%9C%A0%EC%B6%94%20https%3A%2F%2Fblog.sciencebro.kr%2Fsoftware%2Fprotein-annotation-model-with-gnn%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/software/k8s-packet-jumping-with-iptables/" class="pagination--pager" title="쿠버네티스 서비스의 외부 노출">Previous</a>
+    
+    
+      <a href="/lifestyle/differ-of-your-ability-and-others/" class="pagination--pager" title="다른 사람과 다름을 느낄 때">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/lifestyle/differ-of-your-ability-and-others/" rel="permalink">다른 사람과 다름을 느낄 때
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">나와 다른 사람의 차이를 느낄 때, 성장 또는 도태를 선택할 수 있다.
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/software/k8s-packet-jumping-with-iptables/" rel="permalink">쿠버네티스 서비스의 외부 노출
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">노드 IP가 노출된 로컬 쿠버네티스 환경에서 어떻게 각 요청이 쿠버네티스 Cluster IP로 연결될까?
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/lifestyle/modern-office-type/" rel="permalink">현대적인 업무 방식
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">9 to 6는 왜 만들어졌고, 아직도 사용되는가?
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/lifestyle/define-job-about-human/" rel="permalink">직업의 변화, 정보 우위
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">미래에 사람의 직업은 어떻게 변하고, 어떤 강점이 관계의 우위를 만드는가
+</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        
+<div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/shine-shaan" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://blog.sciencebro.kr/privacy/" rel="nofollow noopener noreferrer"><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy Policy</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://blog.sciencebro.kr">Shaan Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NE51XQKB89"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NE51XQKB89', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
