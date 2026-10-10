@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://blog.sciencebro.kr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sciencebro.kr/" rel="alternate" type="text/html" /><updated>2026-10-10T15:22:12+09:00</updated><id>https://blog.sciencebro.kr/feed.xml</id><title type="html">Shaan Blog</title><subtitle>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</subtitle><author><name>Shaan Lee</name></author><entry><title type="html">nginx 재시작을 위한 두 가지 방법</title><link href="https://blog.sciencebro.kr/software/two-way-of-nginx-process-restart/" rel="alternate" type="text/html" title="nginx 재시작을 위한 두 가지 방법" /><published>2026-10-10T12:00:00+09:00</published><updated>2026-10-10T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/software/two-way-of-nginx-process-restart</id><content type="html" xml:base="https://blog.sciencebro.kr/software/two-way-of-nginx-process-restart/">&lt;h2 id=&quot;nginx-기능&quot;&gt;nginx 기능&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://blog.sciencebro.kr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sciencebro.kr/" rel="alternate" type="text/html" /><updated>2026-10-10T15:30:08+09:00</updated><id>https://blog.sciencebro.kr/feed.xml</id><title type="html">Shaan Blog</title><subtitle>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</subtitle><author><name>Shaan Lee</name></author><entry><title type="html">nginx 재시작을 위한 두 가지 방법</title><link href="https://blog.sciencebro.kr/software/two-way-of-nginx-process-restart/" rel="alternate" type="text/html" title="nginx 재시작을 위한 두 가지 방법" /><published>2026-10-10T12:00:00+09:00</published><updated>2026-10-10T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/software/two-way-of-nginx-process-restart</id><content type="html" xml:base="https://blog.sciencebro.kr/software/two-way-of-nginx-process-restart/">&lt;h2 id=&quot;nginx-기능&quot;&gt;nginx 기능&lt;/h2&gt;
 
 &lt;p&gt;nginx는 주로 정적 파일을 서버에서 반환하기 위한 용도, 서버의 특정 로컬 경로와 외부 접속 경로를 라우팅하는 용도로 사용한다.&lt;/p&gt;
 
@@ -16,7 +16,7 @@
 
 ## 서비스에 대한 설명과 다른 systemd 서비스 또는 커널 상태와 연관된 실행 순서
 [Unit]
-Description=My Custom Application Service
+Description=My Nginx Service
 After=network.target ## 사전 실행되어야 하는 서비스 (만약 이 서비스가 도커 컨테이너를 실행한다면, docker 가 사전 실행되어야 함)
 
 ## 서비스의 실행 유형과 실행 권한, 실행 명령어, 재시작 조
@@ -25,8 +25,10 @@ Type=forking ## simple, forking
 PIDFile=/run/nginx.pid
 User=root
 WorkingDirectory=/path/to/nginx
+ExecStartPre=/usr/sbin/nginx -t
 ExecStart=/usr/sbin/nginx
 ExecStop=/usr/sbin/nginx -s quit
+ExecReload=/usr/sbin/nginx -s reload
 Restart=on-failure ## on-failure, always
 
 ## 서버 부팅 시 실행하기 위한 조건
@@ -45,8 +47,7 @@ WantedBy=multi-user.target ## 일반적 부팅 환경은 multi-user (접속 시 
 nginx -s stop ## nginx 프로세스 즉시 종료
 nginx -s quit ## nginx 프로세스를 현재 수행중인 요청 반환 후 종료
 nginx -s reload ## nginx config 등 설정파일 다시 적용
-nginx -s reopen ## nginx log 파일을 다시 열어 작성 (로그 초기화)
-
+nginx -s reopen ## nginx log 파일을 다시 열어 작성
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;nginx 명령어로 수행할 수 없는 nginx 버전 변경 등 상황에서는 직접 프로세스를 재시작하는 방법을 사용한다.&lt;/p&gt;
@@ -86,18 +87,19 @@ kill -WINCH &amp;lt;old PID&amp;gt; # 기존 프로세스 중단, 새로운 프�
 kill -QUIT &amp;lt;old PID&amp;gt; # 기존 프로세스 종료, 새로운 프로세스만 남게 됨 (기존 프로세스는 현재 처리중인 요청 반환 후 종료)
 ## ps 명령으로 새로운 프로세스만 실행중인 것을 확인해야 함
 
-## 실행파일 변경으로 nginx 버전이 바뀐 경우, /proc/&amp;lt;new PID&amp;gt;/fd/0 -v 실행
+## 실행파일 변경으로 nginx 버전이 바뀐 경우, /proc/&amp;lt;new PID&amp;gt;/exe -v 실행
 ## 실행 결과로 출력되는 nginx 버전이 의도한 것과 동일한 경우 성공, 이전 버전으로 출력된다면 실행 파일 위치를 다시 확인 후 앞선 작업 재실행
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;앞선 작업을 실행하는 중 오류가 발생해 작업 이전 상태로 복구하는 경우 아래 명령을 사용한다.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kill -HUP &amp;lt;old PID&amp;gt;
-ps -ef |grep nginx # old PID 동작 확인 (master, worker 모두 동작해야 함)
-kil -WINCH &amp;lt;new PID&amp;gt;
-kill -QUIT &amp;lt;new PID&amp;gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 기존 프로세스를 대상으로 kill -QUIT 실행 이전에 적용 가능함
+# 이미 kill -QUIT을 실행해 기존 프로세스가 종료되었다면, 기존 실행파일을 systemd에 등록된 위치로 대치 후 새로운 프로세스 종료 -&amp;gt; 이전 버전 프로세스 실행 과정을 거쳐야 함
 
+kill -HUP &amp;lt;old PID&amp;gt;
+ps -ef |grep nginx # old PID 동작 확인 (master, worker 모두 동작해야 함)
+kill -WINCH &amp;lt;new PID&amp;gt;
+kill -QUIT &amp;lt;new PID&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Shaan Lee</name></author><category term="software" /><category term="nginx" /><category term="process" /><summary type="html">nginx 재시작 시 편리함을 위한 방법, 무중단을 위한 방법을 소개한다.</summary></entry><entry><title type="html">다른 사람과 다름을 느낄 때</title><link href="https://blog.sciencebro.kr/lifestyle/differ-of-your-ability-and-others/" rel="alternate" type="text/html" title="다른 사람과 다름을 느낄 때" /><published>2026-08-07T12:00:00+09:00</published><updated>2026-08-07T12:00:00+09:00</updated><id>https://blog.sciencebro.kr/lifestyle/differ-of-your-ability-and-others</id><content type="html" xml:base="https://blog.sciencebro.kr/lifestyle/differ-of-your-ability-and-others/">&lt;h2 id=&quot;나와-다름을-느낄-때&quot;&gt;나와 다름을 느낄 때&lt;/h2&gt;
 
 &lt;p&gt;일상생활이나 업무를 하며, 우리는 많은 사람들과 소통한다.&lt;/p&gt;
