@@ -130,4 +130,10 @@ var store = [{
         "tags": ["social","ability"],
         "url": "/lifestyle/differ-of-your-ability-and-others/",
         "teaser": null
+      },{
+        "title": "nginx 재시작을 위한 두 가지 방법",
+        "excerpt":"nginx 기능 nginx는 주로 정적 파일을 서버에서 반환하기 위한 용도, 서버의 특정 로컬 경로와 외부 접속 경로를 라우팅하는 용도로 사용한다. nginx를 이용해 특정 경로 별 반환하는 컨텐츠를 구분하거나 도메인 별 컨텐츠 구분 등 기능을 구현할 수 있다. 일반적으로 nginx를 이용한 라우팅은 http, https를 지원하며 각각 지정 포트 80, 443을 기본으로...","categories": ["software"],
+        "tags": ["nginx","process"],
+        "url": "/software/two-way-of-nginx-process-restart/",
+        "teaser": null
       }]
