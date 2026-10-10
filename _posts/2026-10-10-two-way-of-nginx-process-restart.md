@@ -28,7 +28,7 @@ systemd의 재시작 조건을 활성하면 nginx가 오류로 종료되는 등 
 
 ## 서비스에 대한 설명과 다른 systemd 서비스 또는 커널 상태와 연관된 실행 순서
 [Unit]
-Description=My Custom Application Service
+Description=My Nginx Service
 After=network.target ## 사전 실행되어야 하는 서비스 (만약 이 서비스가 도커 컨테이너를 실행한다면, docker 가 사전 실행되어야 함)
 
 ## 서비스의 실행 유형과 실행 권한, 실행 명령어, 재시작 조
@@ -37,8 +37,10 @@ Type=forking ## simple, forking
 PIDFile=/run/nginx.pid
 User=root
 WorkingDirectory=/path/to/nginx
+ExecStartPre=/usr/sbin/nginx -t
 ExecStart=/usr/sbin/nginx
 ExecStop=/usr/sbin/nginx -s quit
+ExecReload=/usr/sbin/nginx -s reload
 Restart=on-failure ## on-failure, always
 
 ## 서버 부팅 시 실행하기 위한 조건
@@ -58,8 +60,7 @@ nginx config 변경은 nginx -s reload 명령어로 수행할 수 있다.
 nginx -s stop ## nginx 프로세스 즉시 종료
 nginx -s quit ## nginx 프로세스를 현재 수행중인 요청 반환 후 종료
 nginx -s reload ## nginx config 등 설정파일 다시 적용
-nginx -s reopen ## nginx log 파일을 다시 열어 작성 (로그 초기화)
-
+nginx -s reopen ## nginx log 파일을 다시 열어 작성
 ```
 
 nginx 명령어로 수행할 수 없는 nginx 버전 변경 등 상황에서는 직접 프로세스를 재시작하는 방법을 사용한다.
@@ -101,17 +102,18 @@ kill -WINCH <old PID> # 기존 프로세스 중단, 새로운 프로세스만 �
 kill -QUIT <old PID> # 기존 프로세스 종료, 새로운 프로세스만 남게 됨 (기존 프로세스는 현재 처리중인 요청 반환 후 종료)
 ## ps 명령으로 새로운 프로세스만 실행중인 것을 확인해야 함
 
-## 실행파일 변경으로 nginx 버전이 바뀐 경우, /proc/<new PID>/fd/0 -v 실행
+## 실행파일 변경으로 nginx 버전이 바뀐 경우, /proc/<new PID>/exe -v 실행
 ## 실행 결과로 출력되는 nginx 버전이 의도한 것과 동일한 경우 성공, 이전 버전으로 출력된다면 실행 파일 위치를 다시 확인 후 앞선 작업 재실행
-
 ```
 
 앞선 작업을 실행하는 중 오류가 발생해 작업 이전 상태로 복구하는 경우 아래 명령을 사용한다.
 
 ```
+# 기존 프로세스를 대상으로 kill -QUIT 실행 이전에 적용 가능함
+# 이미 kill -QUIT을 실행해 기존 프로세스가 종료되었다면, 기존 실행파일을 systemd에 등록된 위치로 대치 후 새로운 프로세스 종료 -> 이전 버전 프로세스 실행 과정을 거쳐야 함
+
 kill -HUP <old PID>
 ps -ef |grep nginx # old PID 동작 확인 (master, worker 모두 동작해야 함)
-kil -WINCH <new PID>
+kill -WINCH <new PID>
 kill -QUIT <new PID>
-
 ```
