@@ -91,4 +91,4 @@ precision : 정답으로 예측한 것 중, 실제 정답인 비율
 
 recall : 실제 정답 중, 정답으로 예측할 비율
 
-f1-score : $2 \times \frac{(precision + recall)} {(precision * recall)}$
+f1-score : $2 \times \frac{(precision \times recall)} {(precision + recall)}$
