@@ -5,8 +5,8 @@
     <description>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</description>
     <link>https://blog.sciencebro.kr/</link>
     <atom:link href="https://blog.sciencebro.kr/rss.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 10 Oct 2026 15:30:08 +0900</pubDate>
-    <lastBuildDate>Sat, 10 Oct 2026 15:30:08 +0900</lastBuildDate>
+    <pubDate>Mon, 19 Oct 2026 22:29:07 +0900</pubDate>
+    <lastBuildDate>Mon, 19 Oct 2026 22:29:07 +0900</lastBuildDate>
     
     <item>
       <title>nginx 재시작을 위한 두 가지 방법</title>
@@ -226,8 +226,7 @@ kill -QUIT &amp;lt;new PID&amp;gt;
 
 &lt;p&gt;지식 그래프 구축을 위해 UniProt 데이터를 노드로 추가하고, 임베딩 데이터를 사전 연산하여 벡터 검색이 가능하도록 준비했습니다.&lt;/p&gt;
 
-&lt;p&gt;커스텀 데이터로는 일반적으로 파지 영역을 탐색하고, 단백질 기능을 분석하는 도구인 Phastest 를 활용해 얻어낸 파지 영역 단백질을 이용합니다.
-과&lt;/p&gt;
+&lt;p&gt;커스텀 데이터로는 일반적으로 파지 영역을 탐색하고, 단백질 기능을 분석하는 도구인 Phastest 를 활용해 얻어낸 파지 영역 단백질을 이용합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;연구-상세&quot;&gt;연구 상세&lt;/h2&gt;
 
@@ -400,11 +399,10 @@ kill -QUIT &amp;lt;new PID&amp;gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-      &lt;th&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;precision&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;recall&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;f1-score&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;support&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
@@ -414,7 +412,6 @@ kill -QUIT &amp;lt;new PID&amp;gt;
       &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;0.87&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;11038&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;macro avg&lt;/td&gt;
@@ -422,7 +419,6 @@ kill -QUIT &amp;lt;new PID&amp;gt;
       &lt;td style=&quot;text-align: left&quot;&gt;0.52&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;0.50&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;11038&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;weighted avg&lt;/td&gt;
@@ -430,10 +426,17 @@ kill -QUIT &amp;lt;new PID&amp;gt;
       &lt;td style=&quot;text-align: left&quot;&gt;0.87&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;0.86&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;11038&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;precision : 정답으로 예측한 것 중, 실제 정답인 비율&lt;/p&gt;
+
+&lt;p&gt;recall : 실제 정답 중, 정답으로 예측할 비율&lt;/p&gt;
+
+&lt;p&gt;f1-score : $2 \times \frac{(precision + recall)} {(precision * recall)}$&lt;/p&gt;
 </description>
       <pubDate>Thu, 25 Jun 2026 12:00:00 +0900</pubDate>
       <link>https://blog.sciencebro.kr/software/protein-annotation-model-with-gnn/</link>
