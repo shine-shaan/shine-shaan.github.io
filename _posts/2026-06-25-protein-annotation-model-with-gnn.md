@@ -7,6 +7,7 @@ tags:
   - biology
   - ai
 date: 2026-06-25 12:00:00 +09:00
+math: true
 ---
 
 ## 연구 개요
