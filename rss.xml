@@ -5,8 +5,8 @@
     <description>blog of software develop and business log  문제 해결을 위한 수단을 연구하며 기록합니다</description>
     <link>https://blog.sciencebro.kr/</link>
     <atom:link href="https://blog.sciencebro.kr/rss.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 19 Oct 2026 22:29:07 +0900</pubDate>
-    <lastBuildDate>Mon, 19 Oct 2026 22:29:07 +0900</lastBuildDate>
+    <pubDate>Mon, 19 Oct 2026 22:34:13 +0900</pubDate>
+    <lastBuildDate>Mon, 19 Oct 2026 22:34:13 +0900</lastBuildDate>
     
     <item>
       <title>nginx 재시작을 위한 두 가지 방법</title>
